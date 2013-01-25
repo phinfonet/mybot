@@ -1,0 +1,19 @@
+- model_class = Command
+.page-header
+  %h1=t '.title', :default => model_class.model_name.human.pluralize
+%table.table.table-striped
+  %thead
+    %tr
+      %th= model_class.human_attribute_name(:name)
+      %th= model_class.human_attribute_name(:value)
+      %th=t '.actions', :default => t("helpers.actions")
+  %tbody
+    - @commands.each do |command|
+      %tr
+        %td= command.name
+        %td= command.value
+        %td
+          = link_to t('.edit', :default => t("helpers.links.edit")), edit_command_path(command), :class => 'btn btn-mini'
+          = link_to t('.destroy', :default => t("helpers.links.destroy")), command_path(command), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-mini btn-danger'
+
+= link_to t('.new', :default => t("helpers.links.new")), new_command_path, :class => 'btn btn-primary'
