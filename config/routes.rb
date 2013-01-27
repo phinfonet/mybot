@@ -1,5 +1,8 @@
 Mybot::Application.routes.draw do
+  root to: "pages#index"
+
   resources :commands
+  match '/auth/:provider/callback', to: 'sessions#create'
 
 
   # The priority is based upon order of creation:
